@@ -20,7 +20,6 @@ const eslintConfig = [
       "react/no-unescaped-entities": "off",
 
       // Manter regras importantes
-      "@typescript-eslint/prefer-const": "error",
       "no-console": "warn"
     }
   }

@@ -60,12 +60,20 @@ export default function Taskcontainer({
           if (!b.dueDate) return -1;
           return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
         case 'priority':
-          const priorityOrder = { 'High': 3, 'Medium': 2, 'Low': 1 };
-          return priorityOrder[b.priority] - priorityOrder[a.priority];
+          const priorityOrder: { [key: string]: number } = {
+            High: 3,
+            Medium: 2,
+            Low: 1,
+          };
+          return (
+            (priorityOrder[b.priority] || 0) - (priorityOrder[a.priority] || 0)
+          );
         case 'title':
           return a.title.localeCompare(b.title);
         case 'createdAt':
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
         default:
           return 0;
       }
