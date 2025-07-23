@@ -8,7 +8,7 @@ export function exportTasksToCSV(tasks: Task[]): void {
       `"${task.title.replace(/"/g, '""')}"`, // Escape quotes
       `"${(task.description || '').replace(/"/g, '""')}"`,
       task.dueDate || '',
-      task.category.name,
+      task.category,
       task.priority,
       task.status,
       task.createdAt,
