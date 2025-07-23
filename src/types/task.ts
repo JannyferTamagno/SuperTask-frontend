@@ -1,17 +1,12 @@
-// src/types/task.ts - VERSÃO CORRIGIDA COMPLETA
-
-// Enums para valores específicos
 export type TaskPriority = 'High' | 'Medium' | 'Low';
 export type TaskStatus = 'Completed' | 'Pending' | 'In Progress';
 
-// Interface para categoria
 export interface TaskCategory {
   id: number;
   name: string;
-  color: string; // Hex color como #3b82f6
+  color: string; 
 }
 
-// Interface principal da Task (como armazenada no sistema)
 export interface Task {
   id: string;
   title: string;
@@ -19,23 +14,21 @@ export interface Task {
   category: number;
   priority: TaskPriority;
   status: TaskStatus;
-  dueDate: string; // ISO date string (YYYY-MM-DD)
-  createdAt: string; // ISO date string (YYYY-MM-DD)
+  dueDate: string; 
+  createdAt: string; 
   completed: boolean;
-  updatedAt?: string; // Opcional para quando task é editada
-  completedAt?: string; // Opcional para quando task é marcada como concluída
+  updatedAt?: string; 
+  completedAt?: string; 
 }
 
-// Interface para criar nova task (alguns campos são opcionais)
 export interface NewTask {
   title: string;
-  description?: string; // Opcional
+  description?: string; 
   category: number;
   priority: TaskPriority;
-  dueDate?: string; // Opcional
+  dueDate?: string; 
 }
 
-// Interface para editar task (todos campos opcionais exceto ID)
 export interface UpdateTask {
   id: string;
   title?: string;
@@ -47,15 +40,13 @@ export interface UpdateTask {
   completed?: boolean;
 }
 
-// Interface para filtros de task
 export interface TaskFilters {
   search: string;
-  priority: string; // Vazio ou um dos valores de TaskPriority
-  status: string; // Vazio ou um dos valores de TaskStatus
-  category?: string; // Opcional - nome da categoria
+  priority: string; 
+  status: string; 
+  category?: string; 
 }
 
-// Interface para estatísticas de tasks
 export interface TaskStats {
   total: number;
   completed: number;
@@ -65,7 +56,6 @@ export interface TaskStats {
   dueToday: number;
 }
 
-// Interface para dados da API do dashboard
 export interface DashboardStats {
   completed: number;
   in_progress: number;
@@ -83,7 +73,6 @@ export interface DashboardStats {
   >;
 }
 
-// Interface para resposta de listagem da API
 export interface TaskListResponse {
   count: number;
   next: string | null;
@@ -91,11 +80,10 @@ export interface TaskListResponse {
   results: Task[];
 }
 
-// Props para componentes
 export interface BannerProps {
   userName?: string | null;
   todaysTasks?: number | null;
-  onCreateTaskClick?: () => void; // Função para abrir modal
+  onCreateTaskClick?: () => void; 
 }
 
 export interface TaskItemProps {
@@ -118,7 +106,7 @@ export interface CreateTaskModalProps {
   isOpen: boolean;
   onClose: () => void;
   onCreateTask: (task: NewTask) => void | Promise<void>;
-  categories?: TaskCategory[]; // Lista de categorias disponíveis
+  categories?: TaskCategory[]; 
 }
 
 export interface FilterbarProps {
@@ -127,12 +115,7 @@ export interface FilterbarProps {
   onExportCSV?: () => void;
 }
 
-// ✅ REMOVER as linhas problemáticas ou usar versão corrigida:
-// Utility types para validação (OPCIONAL - pode remover se não usar)
-// export type TaskPriorityKey = 'High' | 'Medium' | 'Low'  // igual a TaskPriority
-// export type TaskStatusKey = 'Completed' | 'Pending' | 'In Progress'  // igual a TaskStatus
 
-// Type guards para validação em runtime
 export function isValidTaskPriority(
   priority: string,
 ): priority is TaskPriority {
@@ -143,14 +126,13 @@ export function isValidTaskStatus(status: string): status is TaskStatus {
   return ['Completed', 'Pending', 'In Progress'].includes(status);
 }
 
-// ✅ FUNÇÃO CORRIGIDA:
 export function isValidTask(obj: any): obj is Task {
   return (
     typeof obj === 'object' &&
     typeof obj.id === 'string' &&
     typeof obj.title === 'string' &&
     typeof obj.description === 'string' &&
-    typeof obj.category === 'number' && // ✅ category é number na interface Task
+    typeof obj.category === 'number' && 
     isValidTaskPriority(obj.priority) &&
     isValidTaskStatus(obj.status) &&
     typeof obj.dueDate === 'string' &&

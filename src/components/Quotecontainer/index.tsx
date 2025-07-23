@@ -12,13 +12,11 @@ interface QuoteContainerProps {
 }
 
 export default function QuoteContainer({ quote, loading = false, error = false }: QuoteContainerProps) {
-  // Quote padrão para fallback
   const defaultQuote: QuoteData = {
     quote: "O sucesso é a soma de pequenos esforços repetidos dia após dia.",
     author: "Robert Collier"
   };
 
-  // Usar quote da API se disponível, senão usar a padrão
   const displayQuote = quote || defaultQuote;
 
   return (

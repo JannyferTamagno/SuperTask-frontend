@@ -7,11 +7,9 @@ export default function Home() {
   const router = useRouter()
 
   useEffect(() => {
-    // Redirecionar sempre para login
     router.push('/login')
   }, [router])
 
-  // Loading simples
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center">
       <div className="text-center text-white">

@@ -29,29 +29,23 @@ interface UpdateProfileData {
   email?: string
 }
 
-// Criar o contexto
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-// Provider do contexto
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Verificar se há token salvo ao inicializar
   useEffect(() => {
     const initAuth = async () => {
       try {
-        // Verificar se há token armazenado
         if (authAPI.isAuthenticated()) {
-          // Tentar buscar dados do usuário da API
           const userData = await authAPI.getUser()
           setUser(userData)
         }
       } catch (error) {
         console.error('Failed to initialize auth:', error)
         
-        // Se falhar ao buscar dados do usuário, limpar tokens inválidos
         try {
           await authAPI.logout()
         } catch (logoutError) {
@@ -72,7 +66,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(true)
       setError(null)
       
-      // Usar API real
       const response = await authAPI.login({ username, password })
       setUser(response.user)
       
@@ -93,7 +86,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(true)
       setError(null)
       
-      // Usar API real
       const response = await authAPI.register(userData)
       setUser(response.user)
       
@@ -113,14 +105,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setLoading(true)
       
-      // Usar API real para logout
       await authAPI.logout()
       
       console.log('✅ Logout realizado com sucesso!')
       
     } catch (error) {
       console.error('Logout error:', error)
-      // Mesmo com erro na API, limpar estado local
     } finally {
       setUser(null)
       setLoading(false)
@@ -131,7 +121,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setError(null)
       
-      // Usar API real
       const updatedUser = await authAPI.updateProfile(userData)
       setUser(updatedUser)
       
@@ -163,7 +152,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   )
 }
 
-// Hook para usar o contexto
 export function useAuth() {
   const context = useContext(AuthContext)
   if (context === undefined) {

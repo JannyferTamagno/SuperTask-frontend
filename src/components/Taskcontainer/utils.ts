@@ -1,11 +1,10 @@
-// components/TaskList/utils.ts
 import type { Task } from '@/types/task'
 
 export function exportTasksToCSV(tasks: Task[]): void {
   const header = "Title,Description,Due Date,Category,Priority,Status,Created At\n"
   const rows = tasks.map((task) =>
     [
-      `"${task.title.replace(/"/g, '""')}"`, // Escape quotes
+      `"${task.title.replace(/"/g, '""')}"`, 
       `"${(task.description || '').replace(/"/g, '""')}"`,
       task.dueDate || '',
       task.category,
@@ -26,6 +25,5 @@ export function exportTasksToCSV(tasks: Task[]): void {
   link.click()
   document.body.removeChild(link)
   
-  // Clean up
   URL.revokeObjectURL(url)
 }

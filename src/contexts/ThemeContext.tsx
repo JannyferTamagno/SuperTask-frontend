@@ -15,20 +15,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark')
   const [mounted, setMounted] = useState(false)
 
-  // Verificar se há tema salvo no localStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme
     if (savedTheme) {
       setTheme(savedTheme)
     } else {
-      // Verificar preferência do sistema
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
       setTheme(systemPrefersDark ? 'dark' : 'light')
     }
     setMounted(true)
   }, [])
 
-  // Aplicar o tema ao documento
   useEffect(() => {
     if (mounted) {
       const root = document.documentElement
@@ -49,7 +46,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
   }
 
-  // Prevenir hidratação incorreta
   if (!mounted) {
     return <div className="min-h-screen bg-gray-900" />
   }

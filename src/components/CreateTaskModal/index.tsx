@@ -22,7 +22,6 @@ export default function CreateTaskModal({
   const [errors, setErrors] = useState<{[key: string]: string}>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
       setFormData({
@@ -37,7 +36,6 @@ export default function CreateTaskModal({
     }
   }, [isOpen, categories])
 
-  // Close modal on ESC key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -49,7 +47,6 @@ export default function CreateTaskModal({
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [isOpen, onClose])
 
-  // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -90,14 +87,11 @@ export default function CreateTaskModal({
   setIsSubmitting(true)
   
   try {
-    // Chama o handle da page que faz a comunicação com a API
     await onCreateTask(formData)
     
-    // Se chegou até aqui, a operação foi bem-sucedida
-    onClose() // Fecha o modal apenas em caso de sucesso
+    onClose() 
     
   } catch (error) {
-    // Trata erros vindos da page
     console.error('Erro no componente:', error)
     setErrors({ submit: 'Erro ao criar tarefa. Tente novamente.' })
   } finally {
@@ -116,7 +110,6 @@ export default function CreateTaskModal({
   const handleInputChange = (field: keyof NewTask, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
     
-    // Limpar erro do campo quando usuário começar a digitar
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }))
     }

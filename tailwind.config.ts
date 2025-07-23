@@ -21,7 +21,6 @@ const config: Config = {
         'light': '#1f2937',
         'dark': '#ffffff',
       },
-      // Transições suaves para mudança de tema
       transitionProperty: {
         'colors': 'color, background-color, border-color, text-decoration-color, fill, stroke',
       },

@@ -13,7 +13,6 @@ export default function StatsContainer({ icon, title, value, bgColor = "#1f2937"
       className="rounded-xl p-4 min-w-[150px] border border-gray-200 dark:border-gray-600 transition-colors"
       style={{ 
         backgroundColor: bgColor,
-        // Ajustar opacidade baseado no tema
         opacity: 0.9 
       }}
     >

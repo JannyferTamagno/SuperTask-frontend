@@ -45,7 +45,6 @@ export default function TaskItem({ task, onToggleComplete, onEdit, onDelete }: T
     const date = new Date(dateString);
     const today = new Date();
     
-    // Resetar horas para comparação correta
     const dateOnly = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     
@@ -110,7 +109,7 @@ export default function TaskItem({ task, onToggleComplete, onEdit, onDelete }: T
           checked={task.completed} 
           onChange={handleCheckboxChange}
           className="mt-1 cursor-pointer accent-blue-600 w-4 h-4" 
-          disabled={!onToggleComplete} // Desabilita se não há handler
+          disabled={!onToggleComplete} 
         />
         <div className="space-y-2 flex-1">
           <h3 className={`font-semibold ${

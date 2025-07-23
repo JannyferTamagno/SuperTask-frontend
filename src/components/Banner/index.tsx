@@ -5,7 +5,7 @@ import Button from '../Button'
 interface BannerProps {
   userName?: string | null
   todaysTasks?: number | null
-  onCreateTaskClick?: () => void // Função para abrir modal
+  onCreateTaskClick?: () => void 
 }
 
 export default function Banner({ 
@@ -13,7 +13,6 @@ export default function Banner({
   todaysTasks = null, 
   onCreateTaskClick 
 }: BannerProps) {
-  // Usar valores padrão quando não há dados da API
   const displayName = userName || "Usuário"
   const displayTasks = todaysTasks ?? 0
 

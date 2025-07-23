@@ -35,8 +35,6 @@ export function Authguard({
     )
   }
 
-  // Se requer autenticação mas não está autenticado, não renderiza nada
-  // (vai redirecionar no useEffect)
   if (requireAuth && !isAuthenticated) {
     return null
   }
@@ -44,7 +42,6 @@ export function Authguard({
   return <>{children}</>
 }
 
-// Hook personalizado para uso mais fácil
 export function useAuthguard(requireAuth: boolean = true) {
   const { isAuthenticated, loading } = useAuth()
   

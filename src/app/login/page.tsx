@@ -21,7 +21,6 @@ export default function LoginPage() {
   })
   const [formErrors, setFormErrors] = useState<{[key: string]: string}>({})
 
-  // Redirecionar se já estiver logado
   useEffect(() => {
     if (isAuthenticated) {
       router.push('/dashboard')
@@ -74,7 +73,6 @@ export default function LoginPage() {
         })
       }
       
-      // Redirecionar será feito pelo useEffect
     } catch (error) {
       console.error('Auth error:', error)
     }
@@ -83,7 +81,6 @@ export default function LoginPage() {
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
     
-    // Limpar erro do campo quando usuário começar a digitar
     if (formErrors[field]) {
       setFormErrors(prev => ({ ...prev, [field]: '' }))
     }

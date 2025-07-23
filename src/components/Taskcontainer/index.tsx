@@ -6,7 +6,7 @@ import Button from "../Button";
 import { exportTasksToCSV } from "./utils";
 
 interface TaskcontainerProps {
-  tasks: any[]; // vindo do backend
+  tasks: any[]; 
   filters: {
     search: string;
     priority?: string;
@@ -15,7 +15,7 @@ interface TaskcontainerProps {
   loading?: boolean;
   onUpdateTask?: (task: any) => void;
   onDeleteTask?: (taskId: string) => void;
-  onToggleComplete?: (taskId: string) => void; // ← Adicionado
+  onToggleComplete?: (taskId: string) => void; 
 }
 
 const ITEMS_PER_PAGE = 5;
@@ -26,7 +26,7 @@ export default function Taskcontainer({
   loading,
   onUpdateTask,
   onDeleteTask,
-  onToggleComplete // ← Adicionado
+  onToggleComplete 
 }: TaskcontainerProps) {
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState('dueDate');
@@ -34,28 +34,23 @@ export default function Taskcontainer({
   const filtered = useMemo(() => {
     let result = tasks;
 
-    // Filtro por busca (título)
     if (filters.search) {
       result = result.filter((t) =>
         t.title.toLowerCase().includes(filters.search.toLowerCase())
       );
     }
 
-    // Filtro por prioridade
     if (filters.priority) {
       result = result.filter((t) => t.priority === filters.priority);
     }
 
-    // Filtro por status
     if (filters.status) {
       result = result.filter((t) => t.status === filters.status);
     }
 
-    // Ordenação
     result = [...result].sort((a, b) => {
       switch (sortBy) {
         case 'dueDate':
-          // Colocar tarefas sem data no final
           if (!a.dueDate) return 1;
           if (!b.dueDate) return -1;
           return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
@@ -89,7 +84,6 @@ export default function Taskcontainer({
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
 
-  // Resetar página quando filtros mudarem
   useMemo(() => {
     setPage(1);
   }, [filters]);
@@ -143,7 +137,7 @@ export default function Taskcontainer({
               <TaskItem 
                 key={task.id} 
                 task={task}
-                onToggleComplete={onToggleComplete} // ← Passando a prop
+                onToggleComplete={onToggleComplete} 
                 onEdit={onUpdateTask}
                 onDelete={onDeleteTask}
               />
