@@ -29,13 +29,16 @@ export default function QuoteContainer({ quote, loading = false, error = false }
             <QuoteIcon className="text-blue-600 dark:text-blue-400" size={20} />
           </div>
         </div>
-        
+
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-            <Sparkles size={18} className="text-yellow-500 dark:text-yellow-400" />
+            <Sparkles
+              size={18}
+              className="text-yellow-500 dark:text-yellow-400"
+            />
             Citação do Dia
           </h3>
-          
+
           {loading ? (
             <div className="space-y-3 animate-pulse">
               <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-full"></div>
@@ -45,7 +48,7 @@ export default function QuoteContainer({ quote, loading = false, error = false }
           ) : error ? (
             <div className="space-y-3">
               <blockquote className="text-gray-700 dark:text-gray-300 italic leading-relaxed">
-                "{defaultQuote.quote}"
+                &quot{defaultQuote.quote}&quot
               </blockquote>
               <cite className="text-sm text-gray-500 dark:text-gray-400 font-medium not-italic">
                 — {defaultQuote.author}
@@ -64,11 +67,12 @@ export default function QuoteContainer({ quote, loading = false, error = false }
               </cite>
             </div>
           )}
-          
+
           <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-600">
             <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
               <RefreshCw size={12} />
-              {quote && !error ? 'Carregada da API' : 'Citação padrão'} • Renovada diariamente
+              {quote && !error ? 'Carregada da API' : 'Citação padrão'} •
+              Renovada diariamente
             </p>
           </div>
         </div>
